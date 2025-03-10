@@ -1,49 +1,29 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
 import RegisterView from "@/views/Auth/RegisterView.vue";
 import LoginView from "@/views/Auth/LoginView.vue";
-import UsersView from "@/views/UsersView.vue";
+import ShopView from "@/views/ShopView.vue";
 import { useAuthStore } from "@/stores/auth";
+
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: "/",
-      name: "home",
-      component: HomeView,
+      name: "shop",
+      component: ShopView,
     },
     {
       path: "/register",
       name: "register",
       component: RegisterView,
-      meta: { guest: true },
     },
     {
       path: "/login",
       name: "login",
       component: LoginView,
-      meta: { guest: true },
-    },
-    {
-      path: "/users",
-      name: "users",
-      component: UsersView,
-      meta: { requiresAuth: true, requiresAdmin: false },
     },
   ],
 });
 
-router.beforeEach(async (to, from) => {
-  const authStore = useAuthStore();
-  await authStore.getUser();
-  if (authStore.user && to.meta.guest) {
-    return { name: "home" };
-  }
-  if (to.meta.requiresAuth && !authStore.user) {
-    return { name: "login" };
-  }
-  if (to.meta.requiresAdmin && authStore.user.role !== "admin") {
-    return { name: "home" };
-  }
-});
 export default router;
