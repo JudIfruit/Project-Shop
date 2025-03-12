@@ -6,6 +6,8 @@ import { computed } from "vue";
 import images2 from "../assets/img/images2.jpg";
 import images3 from "../assets/img/images3.jpg";
 
+import boxicons from "boxicons";
+
 const produits = ref([
   { id: 1, titre: "Produit A", prix: "25€", image: images2 },
   { id: 2, titre: "Produit B", prix: "30€", image: images2 },
@@ -33,52 +35,74 @@ const removeAllProduits = () => {
     <Navbar />
   </section>
 
-
-  <div class="flex flex-col pt-20 px-40 bg-[#302082] min-h-screen text-white">
-    <section class="mt-12 flex-1 grid grid-cols-[3fr_1fr] gap-4 p-4">
-      <!-- Colonne gauche -->
-      <div class="flex flex-col gap-4 w-full">
-        <!-- Bannière Promotion -->
-        <div class="bg-white h-[150px] flex items-center justify-center text-black text-xl font-bold rounded-lg">
-          Bannière Promotion
-        </div>
-        
-        <!-- Liste des produits -->
-        <div class="bg-white p-5 text-black text-xl font-bold w-full min-h-[535px] rounded-lg">
-          <h2 class="text-2xl mb-4">Votre panier</h2>
-          <div class="flex justify-between mr-8">
-            <button class="font-normal text-base text-[#302082] hover:cursor-pointer"  @click="removeAllProduits">Remove all products</button>
-            <h5 class="font-normal text-base">Prix</h5>
-          </div>
-          <div class="grid gap-4 border-t-2 border-gray-200">
-            <div v-for="produit in produits" :key="produit.id" class="h-[200px] bg-white text-black p-4 flex relative border-b-2 border-gray-200">
-
-              <img :src="produit.image" alt="Produit" class="w-1/4 h-full object-cover rounded-md">
-              
-              <!-- Contenu texte à droite -->
-              <div class="flex flex-col flex-1 ml-4 relative">
-                <p class="absolute top-2 right-2 px-3 py-1 bg-gray-200 text-gray-800 font-semibold rounded-lg">
-                  {{ produit.prix }}
-                </p>
-                <h3 class="text-lg font-bold mt-2">
-                  {{ produit.titre }}
-                </h3>
-                <div class="mt-auto flex justify-end gap-2">
-                  <button @click="removeProduit(produit.id)" class="bg-red-500 text-white px-4 py-2 rounded-lg">Remove</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+  <div class="flex flex-col pt-14 md:pt-20 bg-[#302082] min-h-screen text-white gap-4">
+    
+    <!-- Partie haute : Promo + Total -->
+    <section class="mt-12 flex flex-wrap gap-4 px-3 justify-center md:flex-nowrap md:px-8">
+      
+      <!-- Bannière Promotion -->
+      <div class="bg-white h-[150px] w-full min-w-[250px] flex items-center justify-center text-black text-xl font-bold rounded-lg flex-1">
+        Bannière Promotion
       </div>
 
-      <!-- Colonne droite (Summary reste fixe en taille) -->
-      <div class="bg-white h-[150px] flex flex-col p-4 text-black text-2xl font-bold rounded-lg">
-        <div class="flex flex-col p-4">
-          <p>Sous-total ({{ produitTotal }} article(s)): {{prixTotal}}€</p>
-          <button class="flex justify-center mt-6 bg-[#302082] text-white py-2 rounded-lg">Checkout</button>
+      <!-- Carte Total (taille fixe) -->
+      <div class="bg-white w-full md:w-[350px] h-[150px] flex flex-col md:p-4 text-black font-bold rounded-lg text-xl overflow-hidden">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between p-4">
+          <p>Sous-total ({{ produitTotal }} article(s)):</p>
+          <p class="text-[#302082]">{{ prixTotal }}€</p>
+        </div>
+        <div class="flex flex-col px-4">
+          <button class="flex justify-center mt-2 md:mt-2 bg-[#302082] text-white py-2 rounded-lg">Checkout</button>
         </div>
       </div>
     </section>
+
+   <!-- Partie basse : Panier -->
+<section class="p-3 md:px-8 w-full">
+  <div class="bg-white p-5 text-black text-xl font-bold w-full min-h-[535px] rounded-lg">
+    <h2 class="text-2xl mb-4">Votre panier</h2>
+    <div class="flex justify-between mr-6">
+      <button class="font-normal text-base text-[#302082] hover:cursor-pointer" @click="removeAllProduits">
+        Remove all products
+      </button>
+      <h5 class="font-normal text-base hidden md:block">Prix</h5>
+    </div>
+    
+    <div class="grid gap-4 border-t-2 border-gray-200">
+      <div v-for="produit in produits" :key="produit.id" class="bg-white text-black p-4 flex flex-col md:flex-row items-start border-b-2 border-gray-200">
+
+        <!-- Image du produit -->
+        <div class="flex w-full md:w-60 md:h-60 justify-center">
+          <img :src="produit.image" alt="Produit" class="w-24 h-24 md:w-60 md:h-60 object-cover rounded-md">
+        </div>
+
+        
+        <!-- Conteneur principal du texte -->
+        <div class="flex flex-col flex-1 ml-4 w-full md:h-full">
+          
+          <!-- Titre et Prix en space-between -->
+          <div class="grid md:flex md:justify-between items-center w-full">
+            <div>
+              <h3 class="text-lg font-bold">{{ produit.titre }}</h3>
+            </div>
+            <div>
+              <p class="text-gray-800 font-semibold">{{ produit.prix }}</p>
+            </div>
+          </div>
+
+          <!-- Bouton delete bien en bas à droite -->
+          <div class="flex-1 flex items-end mt-5">
+            <button @click="removeProduit(produit.id)" class="flex bg-red-500 text-white p-2 rounded-lg">
+              <box-icon name='trash-alt'></box-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
   </div>
 </template>
+
