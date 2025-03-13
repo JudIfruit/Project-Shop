@@ -35,5 +35,10 @@ npm run build
 
 **Contexte :**
 
-Nous devons développer une interface utilisateur moderne, réactive et facile à maintenir pour notre application. Plusieurs frameworks et librairies existent, mais nogit us avons besoin d'une solution qui offre un bon compromis entre rapidité de développement, performance et maintenabilité à long terme.
+Nous devons développer une interface utilisateur moderne, réactive et facile à maintenir pour notre application. Plusieurs frameworks et librairies existent, mais nogit        us avons besoin d'une solution qui offre un bon compromis entre rapidité de développement, performance et maintenabilité à long terme.
+
+**Décision :**
+
+Nous utilisons VueJS pour la structure et la logique de l'application, et Tailwind CSS pour le styling. VueJS est un framework progressif, facile à apprendre et à intégrer, offrant une excellente performance et une grande flexibilité. Tailwind CSS, quant à lui, est un framework CSS utility-first qui permet de styliser rapidement l'application avec une approche composant et une grande cohérence visuelle.
+
 
