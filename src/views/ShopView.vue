@@ -6,7 +6,7 @@ import { computed } from "vue";
 import images2 from "../assets/img/images2.jpg";
 import images3 from "../assets/img/images3.jpg";
 
-import boxicons from "boxicons";
+import "boxicons";
 
 const produits = ref([
   { id: 1, titre: "Produit A", prix: "25€", image: images2 },
