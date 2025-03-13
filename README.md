@@ -27,4 +27,13 @@ npm run dev
 ```sh
 npm run build
 ```
-    
+## Architectural Decision Records (ADR)
+
+### Adoption de VueJS et Tailwind CSS pour le Frontend
+
+**Titre :** Adoption de VueJS et Tailwind CSS pour le Frontend
+
+**Contexte :**
+
+Nous devons développer une interface utilisateur moderne, réactive et facile à maintenir pour notre application. Plusieurs frameworks et librairies existent, mais nous avons besoin d'une solution qui offre un bon compromis entre rapidité de développement, performance et maintenabilité à long terme.
+
