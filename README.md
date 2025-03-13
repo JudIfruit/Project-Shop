@@ -27,6 +27,7 @@ npm run dev
 ```sh
 npm run build
 ```
+
 ## Architectural Decision Records (ADR)
 
 ### Adoption de VueJS et Tailwind CSS pour le Frontend
@@ -40,5 +41,15 @@ Nous devons développer une interface utilisateur moderne, réactive et facile �
 **Décision :**
 
 Nous utilisons VueJS pour la structure et la logique de l'application, et Tailwind CSS pour le styling. VueJS est un framework progressif, facile à apprendre et à intégrer, offrant une excellente performance et une grande flexibilité. Tailwind CSS, quant à lui, est un framework CSS utility-first qui permet de styliser rapidement l'application avec une approche composant et une grande cohérence visuelle.
+
+**Conséquences :**
+
+*   ✅ **Développement rapide :** VueJS et Tailwind CSS permettent de prototyper et de développer rapidement des interfaces utilisateur.
+*   ✅ **Composants réutilisables :** VueJS encourage la création de composants réutilisables, ce qui facilite la maintenance et l'évolution de l'application.
+*   ✅ **Styling cohérent :** Tailwind CSS assure une cohérence visuelle grâce à son système de classes utilitaires et sa configuration personnalisable.
+*   ✅ **Bonne performance :** VueJS est performant, et Tailwind CSS peut être optimisé pour réduire la taille du CSS en production.
+*   ❌ **Courbe d'apprentissage (Tailwind CSS) :** L'approche utility-first de Tailwind CSS peut nécessiter un temps d'adaptation.
+*   ❌ **Configuration initiale :** La configuration de Tailwind CSS peut être un peu complexe au début.
+
 
 
