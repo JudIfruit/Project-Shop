@@ -35,5 +35,5 @@ npm run build
 
 **Contexte :**
 
-Nous devons développer une interface utilisateur moderne, réactive et facile à maintenir pour notre application. Plusieurs frameworks et librairies existent, mais nous avons besoin d'une solution qui offre un bon compromis entre rapidité de développement, performance et maintenabilité à long terme.
+Nous devons développer une interface utilisateur moderne, réactive et facile à maintenir pour notre application. Plusieurs frameworks et librairies existent, mais nogit us avons besoin d'une solution qui offre un bon compromis entre rapidité de développement, performance et maintenabilité à long terme.
 
