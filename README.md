@@ -51,5 +51,17 @@ Nous utilisons VueJS pour la structure et la logique de l'application, et Tailwi
 *   ❌ **Courbe d'apprentissage (Tailwind CSS) :** L'approche utility-first de Tailwind CSS peut nécessiter un temps d'adaptation.
 *   ❌ **Configuration initiale :** La configuration de Tailwind CSS peut être un peu complexe au début.
 
+**Alternatives considérées :**
+
+*   **React + Material UI/Bootstrap:**
+    *   ✅ Large communauté et écosystème.
+    *   ✅ Composants UI prêts à l'emploi.
+    *   ❌ Plus complexe à configurer et à personnaliser.
+    *   ❌ Peut être plus lourd en termes de performance.
+*   **Vanilla JavaScript + CSS personnalisé:**
+    *   ✅ Contrôle total sur le code.
+    *   ✅ Flexibilité maximale pour des designs uniques.
+    *   ❌ Développement plus long et plus complexe.
+    *   ❌ Risque d'incohérences visuelles et maintenance plus difficile.
 
 
