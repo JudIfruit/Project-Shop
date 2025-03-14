@@ -32,7 +32,6 @@ onMounted(() => {
 
       <div v-else class="space-x-6">
         <RouterLink :to="{ name: 'login' }" class="hover:text-gray-400">Login</RouterLink>
-        <RouterLink :to="{ name: 'register' }" class="hover:text-gray-400">Register</RouterLink>
       </div>
     </nav>
   </header>
