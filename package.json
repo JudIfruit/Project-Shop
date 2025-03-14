@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@stripe/stripe-js": "^6.0.0",
     "@vue-stripe/vue-stripe": "^4.5.0",
     "boxicons": "^2.1.4",
     "pinia": "^2.3.0",
