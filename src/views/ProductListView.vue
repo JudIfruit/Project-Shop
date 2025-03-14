@@ -8,9 +8,9 @@ import images2 from '../assets/img/images2.jpg';
 import images3 from '../assets/img/images3.jpg';
 
 const produitsDisponibles = ref([
-  { id: 1, titre: 'Produit A', prix: 25, images: images1 },
-  { id: 2, titre: 'Produit B', prix: 30, images: images2 },
-  { id: 3, titre: 'Produit C', prix: 40, images: images3 },
+  { id: 1, titre: 'Produit A', prix: 25, image: images1 },
+  { id: 2, titre: 'Produit B', prix: 30, image: images2 },
+  { id: 3, titre: 'Produit C', prix: 40, image: images3 },
 ]);
 
 const router = useRouter();
