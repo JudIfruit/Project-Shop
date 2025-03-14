@@ -3,6 +3,7 @@ import RegisterView from "@/views/Auth/RegisterView.vue";
 import LoginView from "@/views/Auth/LoginView.vue";
 import ShopView from "@/views/ShopView.vue";
 import { useAuthStore } from "@/stores/auth";
+import ProductListView from "@/views/ProductListView.vue";
 
 
 const router = createRouter({
@@ -10,6 +11,11 @@ const router = createRouter({
   routes: [
     {
       path: "/",
+      name: "home",
+      component: ProductListView,
+    },
+    {
+      path: "/shop",
       name: "shop",
       component: ShopView,
     },

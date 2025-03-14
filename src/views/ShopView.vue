@@ -8,11 +8,7 @@ import "boxicons";
 const authStore = useAuthStore();
 
 const pk = 'pk_test_51Ny7JaHVnu49ZpSn2I9HIRbRQeJqmf4Ttz3EscQuyFBYDdsTFFd7xgleXcIM8ognR3BG4sdV1Mfq7iC3hVpheYG700Ay6HrQsk';
-const produits = ref([
-  { id: 1, titre: 'Produit A', prix: 25, images: '../../assets/img/images1.jpg'},
-  { id: 2, titre: 'Produit B', prix: 30 },
-  { id: 3, titre: 'Produit C', prix: 40 },
-]);
+const produits = ref([]);
 
 const produitTotal = computed(() => produits.value.length);
 const prixTotal = computed(() => produits.value.reduce((acc, produit) => acc + produit.prix, 0));
@@ -23,7 +19,6 @@ let stripe;
 let elements;
 let card;
 
-// Créer une référence pour le div cardElement
 const cardElementRef = ref(null);
 
 const handlePaymentClick = async () => {
@@ -31,7 +26,20 @@ const handlePaymentClick = async () => {
   await generatePaymentIntent();
 };
 
+const removeProduit = (id) => {
+  produits.value = produits.value.filter((produit) => produit.id !== id);
+  localStorage.setItem('panier', JSON.stringify(produits.value));
+};
+
+const removeAllProduits = () => {
+  produits.value = [];
+  localStorage.setItem('panier', JSON.stringify(produits.value));
+};
+
 onMounted(() => {
+  const panier = JSON.parse(localStorage.getItem('panier')) || [];
+  produits.value = panier;
+
   if (showPaymentForm.value && elementsOptions.value.client_secret) {
     initializeStripe();
   }
