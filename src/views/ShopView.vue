@@ -24,6 +24,11 @@ let card;
 const cardElementRef = ref(null);
 
 const handlePaymentClick = async () => {
+  if (!authStore.user) {
+    router.push('/login');
+    return;
+  }
+  
   await generatePaymentIntent();
   if (elementsOptions.value.client_secret) {
     localStorage.setItem('client_secret', elementsOptions.value.client_secret); // Stocker le client_secret
