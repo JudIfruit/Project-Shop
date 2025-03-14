@@ -60,21 +60,24 @@ onMounted(() => {
 
 const generatePaymentIntent = async () => {
   try {
-    if (!authStore.user || !authStore.user.token) {
+    // Récupérer le token depuis authStore ou localStorage
+    const token = authStore.user?.token || localStorage.getItem('token');
+
+    if (!token) {
       console.error('❌ Aucun utilisateur connecté ou token non disponible.');
       return;
     }
 
-    const token = authStore.user.token; // Récupérer dynamiquement le token
+    console.log('Token utilisé:', token);
 
     const response = await fetch('https://api.leonmorival.xyz/api/create-payment-intent', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`, // Utilisation du token dynamique
+        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify({
-        amount: prixTotal.value * 100, // Conversion du prix en centimes
+        amount: prixTotal.value * 100,
         currency: 'eur',
       }),
     });
@@ -96,6 +99,7 @@ const generatePaymentIntent = async () => {
     console.error('Erreur lors de la génération du PaymentIntent', error);
   }
 };
+
 
 
 const initializeStripe = async () => {
