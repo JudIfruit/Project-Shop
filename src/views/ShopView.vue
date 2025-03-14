@@ -60,11 +60,7 @@ onMounted(() => {
 
 const generatePaymentIntent = async () => {
   try {
-    if (!authStore.user || !authStore.user.token) {
-      console.error('❌ Aucun utilisateur connecté ou token non disponible.');
-      return;
-    }
-    
+
     const token = authStore.user.token; 
 
     const response = await fetch('https://api.leonmorival.xyz/api/create-payment-intent', {
