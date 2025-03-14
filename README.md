@@ -28,6 +28,14 @@ npm run dev
 npm run build
 ```
 
+## API Documentation
+
+Notre API, testée via API Platform, est accessible à l'adresse suivante : [https://api.leonmorival.xyz/api](https://api.leonmorival.xyz/api)
+
+Toutes les routes disponibles ont été vérifiées et sont prêtes à être utilisées.
+
+
+
 ## Architectural Decision Records (ADR)
 
 ### Adoption de VueJS et Tailwind CSS pour le Frontend
