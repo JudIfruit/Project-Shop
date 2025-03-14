@@ -1,11 +1,13 @@
 <script setup>
 import { ref, computed, onMounted, nextTick } from 'vue';
 import { loadStripe } from '@stripe/stripe-js';
+import { useRouter } from 'vue-router';
 import { useAuthStore } from "@/stores/auth";
 import Navbar from "@/components/Navbar.vue";
 import "boxicons";
 
 const authStore = useAuthStore();
+const router = useRouter();
 
 const pk = 'pk_test_51Ny7JaHVnu49ZpSn2I9HIRbRQeJqmf4Ttz3EscQuyFBYDdsTFFd7xgleXcIM8ognR3BG4sdV1Mfq7iC3hVpheYG700Ay6HrQsk';
 const produits = ref([]);
@@ -22,8 +24,13 @@ let card;
 const cardElementRef = ref(null);
 
 const handlePaymentClick = async () => {
-  showPaymentForm.value = true;
   await generatePaymentIntent();
+  if (elementsOptions.value.client_secret) {
+    localStorage.setItem('client_secret', elementsOptions.value.client_secret); // Stocker le client_secret
+    router.push('/payment'); 
+  } else {
+    alert('Erreur lors de la génération du client_secret.');
+  }
 };
 
 const removeProduit = (id) => {
@@ -121,31 +128,28 @@ const pay = async () => {
   </section>
 
   <div class="flex flex-col pt-14 md:pt-20 bg-[#302082] min-h-screen text-white gap-4">
-    
-    <!-- Partie haute : Promo + Total -->
-    <section class="mt-12 flex flex-wrap gap-4 px-3 justify-center md:flex-nowrap md:px-8">
-      
-      <!-- Bannière Promotion -->
+    <section v-if="produitTotal > 0" class="mt-12 flex flex-wrap gap-4 px-3 justify-center md:flex-nowrap md:px-8">
       <div class="bg-white h-[150px] w-full min-w-[250px] flex items-center justify-center text-black text-xl font-bold rounded-lg flex-1">
         Bannière Promotion
       </div>
-
-      <!-- Carte Total (taille fixe) -->
       <div class="bg-white w-full md:w-[350px] h-[150px] flex flex-col md:p-4 text-black font-bold rounded-lg text-xl overflow-hidden">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between p-4">
           <p>Sous-total ({{ produitTotal }} article(s)):</p>
           <p class="text-[#FF6B00]">{{ prixTotal }}€</p>
         </div>
         <div class="flex flex-col px-4">
-          <button class="flex justify-center mt-2 md:mt-2 text-white bg-[#302082] rounded-lg pt-4" @click="handlePaymentClick">
+          <button 
+            v-if="prixTotal > 0" 
+            class="flex justify-center align-center md:mt-2 text-white bg-[#FF6B00] rounded-lg p-4" 
+            @click="handlePaymentClick"
+          >
             Checkout
           </button>
         </div>
       </div>
     </section>
 
-    <!-- Partie basse : Panier -->
-    <section class="p-3 md:px-8 w-full">
+    <section v-if="produitTotal > 0" class="p-3 md:px-8 w-full">
       <div class="bg-white p-5 text-black text-xl font-bold w-full min-h-[535px] rounded-lg">
         <h2 class="text-2xl mb-4">Votre panier</h2>
         <div class="flex justify-between mr-6">
@@ -154,19 +158,12 @@ const pay = async () => {
           </button>
           <h5 class="font-normal text-base hidden md:block mr-2">Prix</h5>
         </div>
-        
         <div class="grid gap-4 border-t-2 border-gray-200">
           <div v-for="produit in produits" :key="produit.id" class="bg-white text-black p-4 flex flex-col md:flex-row items-start border-b-2 border-gray-200">
-
-            <!-- Image du produit -->
             <div class="flex w-full md:w-60 md:h-60 justify-center">
               <img :src="produit.image" alt="Produit" class="w-24 h-24 md:w-60 md:h-60 object-cover rounded-md">
             </div>
-
-            <!-- Conteneur principal du texte -->
             <div class="flex flex-col flex-1 ml-4 w-full md:h-full">
-              
-              <!-- Titre et Prix en space-between -->
               <div class="grid md:flex md:justify-between items-center w-full">
                 <div>
                   <h3 class="text-lg font-bold">{{ produit.titre }}</h3>
@@ -175,8 +172,6 @@ const pay = async () => {
                   <p class="text-gray-800 font-semibold">{{ produit.prix }}€</p>
                 </div>
               </div>
-
-              <!-- Bouton delete bien en bas à droite -->
               <div class="flex-1 flex items-end mt-5">
                 <button @click="removeProduit(produit.id)" class="flex bg-red-500 text-white p-2 rounded-lg">
                   <box-icon name='trash-alt'></box-icon>
@@ -187,12 +182,19 @@ const pay = async () => {
         </div>
       </div>
     </section>
+
     <section v-if="showPaymentForm && elementsOptions.client_secret">
       <div ref="cardElementRef"></div>
       <button @click="pay" class="payment-button">Payer maintenant</button>
     </section>
+
+    <section v-if="produitTotal === 0" class="flex flex-col items-center justify-center mt-60">
+      <p class="text-xl font-bold">Aucun article dans le panier</p>
+      <button @click="router.push('/')" class="mt-4 px-6 py-2 bg-[#FF6B00] text-white rounded-lg">Voir les produits</button>
+    </section>
   </div>
 </template>
+
 
 <style scoped>
 

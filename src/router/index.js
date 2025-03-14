@@ -2,9 +2,10 @@ import { createRouter, createWebHistory } from "vue-router";
 import RegisterView from "@/views/Auth/RegisterView.vue";
 import LoginView from "@/views/Auth/LoginView.vue";
 import ShopView from "@/views/ShopView.vue";
-import { useAuthStore } from "@/stores/auth";
 import ProductListView from "@/views/ProductListView.vue";
+import PaymentView from "@/views/PaymentView.vue";
 
+import { useAuthStore } from "@/stores/auth";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,6 +19,11 @@ const router = createRouter({
       path: "/shop",
       name: "shop",
       component: ShopView,
+    },
+    {
+      path: "/payment",
+      name: "payment",
+      component: PaymentView,
     },
     {
       path: "/register",
